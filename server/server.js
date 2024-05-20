@@ -18,11 +18,6 @@ app.use((req,res,next)=>{
 app.use('/api/todo',todoRouter);
 app.use('/api/auth',auth);
 
-app.get("/", (req, res) => {
-    app.use(express.static(path.resolve(__dirname, "todo-app", "dist")));
-    res.sendFile(path.resolve(__dirname, "todo-app","dist","index.html"));
-});
-
 mongoose
     .connect(process.env.MONGO_URI)
     .then(()=>{

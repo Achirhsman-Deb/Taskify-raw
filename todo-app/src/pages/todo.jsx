@@ -32,7 +32,7 @@ const Todo1 = () => {
 
     const handleDelete = async (cardid) => {
         if (id) {
-            await axios.delete(`${window.location.origin}/api/todo/${cardid}`, { data: { id: id }, }).then((response) => { console.log(response) })
+            await axios.delete(`http://localhost:5000/api/todo/${cardid}`, { data: { id: id }, }).then((response) => { console.log(response) })
             let reducedTodo = [...allTodos];
             reducedTodo.splice(cardid, 1);
             setTodos(reducedTodo);
@@ -52,7 +52,7 @@ const Todo1 = () => {
             let updatedTodoArr = [...allTodos];
             updatedTodoArr.push(newTodoItem)
             setTodos(updatedTodoArr);
-            await axios.post(`${window.location.origin}/api/todo`, { title: newTodoItem.title, body: newTodoItem.body, id: id }).then((Response) => { console.log(Response) });
+            await axios.post(`http://localhost:5000/api/todo`, { title: newTodoItem.title, body: newTodoItem.body, id: id }).then((Response) => { console.log(Response) });
         } else {
             console.error("Please Login first");
         }
@@ -80,7 +80,7 @@ const Todo1 = () => {
         let newtodo = [...allTodos];
         newtodo[currentEdit] = currentEditedItem;
         setTodos(newtodo);
-        await axios.patch(`${window.location.origin}/api/todo/${tid}`, { title: currentEditedItem.title, body: currentEditedItem.body, id: id }).then((response) => { console.log(response) })
+        await axios.patch(`http://localhost:5000/api/todo/${tid}`, { title: currentEditedItem.title, body: currentEditedItem.body, id: id }).then((response) => { console.log(response) })
         setCurrentEdit("");
     }
     useEffect(() => {
@@ -97,7 +97,7 @@ const Todo1 = () => {
     useEffect(() => {
         const fetch = async () => {
             await axios
-                .get(`${window.location.origin}/api/todo/${id}`)
+                .get(`http://localhost:5000/api/todo/${id}`)
                 .then(
                     (response) => {
                         if (response.data.message == "No Todos") {
